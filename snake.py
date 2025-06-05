@@ -6,6 +6,7 @@ UP = 90
 DOWN = 270
 RIGHT = 0
 LEFT = 180
+STARTING_VECTOR = 0
 
 class Snake:
 
@@ -14,6 +15,7 @@ class Snake:
         self.segments = []
         self.create_snake()
         self.head = self.segments[0]
+        self.last_input = STARTING_VECTOR
 
     def create_snake(self):
         for position in STARTING_POSITIONS:
@@ -26,6 +28,13 @@ class Snake:
         new_segment.setpos(position)
         self.segments.append(new_segment)
 
+    def reset(self):
+        for seg in self.segments:
+            seg.goto(1000, 1000)
+        self.segments.clear()
+        self.create_snake()
+        self.head = self.segments[0]
+
     def extend(self):
         self.add_segment(self.segments[-1].position())
 
@@ -35,20 +44,22 @@ class Snake:
             new_y = self.segments[seg_num - 1].ycor()
             self.segments[seg_num].goto(new_x, new_y)
         self.head.forward(MOVE_DISTANCE)
+        self.last_input = self.head.heading()
 
     def up(self):
-        if self.head.heading() != DOWN:
+        if self.last_input != DOWN:
             self.head.setheading(UP)
 
     def down(self):
-        if self.head.heading() != UP:
+        if self.last_input != UP:
             self.head.setheading(DOWN)
 
     def right(self):
-        if self.head.heading() != LEFT:
+        if self.last_input != LEFT:
             self.head.setheading(RIGHT)
 
     def left(self):
-        if self.head.heading() != RIGHT:
+        if self.last_input != RIGHT:
             self.head.setheading(LEFT)
+
 
