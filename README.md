@@ -13,7 +13,7 @@ Un juego clásico de Snake desarrollado en Python utilizando la biblioteca `turt
   - ➡️ `Right`
 - Come la comida verde para aumentar tu puntaje.
 - Evita chocar contra las paredes o contra tu propia cola.
-- Presiona **R** para reiniciar el juego (si está activado).
+- Se reinicia automáticamente, después de perder.
 
 ---
 
